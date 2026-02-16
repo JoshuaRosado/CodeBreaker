@@ -9,13 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(alignment: .leading, spacing: 1, content: greetings)
+    }
+    
+    @ViewBuilder // List of views, Bag of lego View
+    func greetings() -> some View {
+        Image(systemName: "globe")
+        if false {
+            Text("greetings")
         }
-        .padding()
+        Text("howdy!")
+        Circle()
     }
 }
 

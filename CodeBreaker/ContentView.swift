@@ -9,20 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 1, content: greetings)
+        VStack{
+            pegs(colors:[.red,.green,.green, .yellow])
+            pegs(colors:[.red,.blue,.green, .red])
+            pegs(colors:[.red,.green,.green, .yellow])
+            pegs(colors:[.red,.yellow,.green, .blue])
+            
+        }
+        .padding()
     }
     
-    @ViewBuilder // List of views, Bag of lego View
-    func greetings() -> some View {
-        Image(systemName: "globe")
-        if false {
-            Text("greetings")
+    func pegs(colors : Array<Color>) -> some View {
+        HStack{
+            
+            ForEach(colors.indices, id: \.self) { index in
+                Circle().foregroundStyle((colors[index]))
+            }
+            HStack{
+                
+            }
         }
-        Text("howdy!")
-        Circle()
     }
 }
-
 #Preview {
     ContentView()
 }

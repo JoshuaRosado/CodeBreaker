@@ -23,14 +23,18 @@ struct ContentView: View {
         HStack{
             
             ForEach(colors.indices, id: \.self) { index in
-                Circle().foregroundStyle((colors[index]))
+                RoundedRectangle(cornerRadius: 10 )
+                    .aspectRatio(1,contentMode: .fit)
+                    .foregroundStyle((colors[index]))
             }
-            HStack{
-                
-            }
+            MatchMarkers(matches: [.exact, .inexact, .nomatch])
+            
         }
     }
 }
+
+
+
 #Preview {
     ContentView()
 }

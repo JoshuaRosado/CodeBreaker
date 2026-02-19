@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+enum Match {
+    case nomatch
+    case exact
+    case inexact
+    
+}
 struct MatchMarkers: View {
     var matches: [Match]
     var body: some View {
@@ -22,8 +28,10 @@ struct MatchMarkers: View {
         }
     }
     func matchMarker(peg: Int) -> some View {
-        let exactCount: Int = matches.count(where: { match in match == .exact})
-        let foundCount: Int = matches.count(where: { match in match != .nomatch})
+        // How many times the first($0) INT matches
+        let exactCount = matches.count { $0 == .exact}
+        // How many times the first($0) INT does not match
+        let foundCount = matches.count{ $0 != .nomatch}
         return Circle()
             .fill(exactCount > peg ? Color.primary : Color.clear)
             .strokeBorder(
@@ -32,14 +40,11 @@ struct MatchMarkers: View {
             )
             .aspectRatio(1,contentMode: .fit)
     }
-}
-
-enum Match {
-    case nomatch
-    case exact
-    case inexact
+    
     
 }
+
+
 
 #Preview {
     MatchMarkers(matches: [.exact, .inexact, .nomatch])

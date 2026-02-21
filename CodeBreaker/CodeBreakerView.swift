@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct CodeBreakerView: View {
+    let game = CodeBreaker()
     var body: some View {
         VStack{
-            pegs(colors:[.red,.green,.green, .yellow])
-            pegs(colors:[.red,.blue,.green, .red])
-            pegs(colors:[.red,.green,.blue, .yellow])
-            pegs(colors:[.green,.red,.green, .blue])
+            pegs(colors: game.masterCode.pegs)
+            pegs(colors: game.guess)
+            pegs(colors:game.attempts[0].pegs)
+            
             
         }
         .padding()
@@ -36,5 +37,5 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView()
+    CodeBreakerView()
 }

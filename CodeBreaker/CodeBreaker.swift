@@ -15,10 +15,15 @@ struct CodeBreaker {
     var attempts: [Code] = [Code]()
     let pegChoices: [Peg] = [.red, .green, .blue, .yellow]
     
-    func changeGuessPeg(at index: Int){
+    mutating func changeGuessPeg(at index: Int){
         let existingPeg = guess.pegs[index]
-        let indexOfExistingPegInPegChoices = pegChoices.firstIndex(
-            of: existingPeg)!
+        if let indexOfExistingPegInPegChoices = pegChoices.firstIndex(
+            of: existingPeg) {
+            let newPeg = pegChoices[(indexOfExistingPegInPegChoices + 1) % pegChoices.count]
+                guess.pegs[index] = newPeg
+        } else {
+            guess.pegs[index] = pegChoices.first ?? Code.missing
+        }
     }
     
 }
@@ -28,7 +33,7 @@ struct Code {
     var kind: Kind
     var pegs: [Peg] = [.red, .green, .blue, .yellow]
 
-    
+    static let missing: Peg = .clear
     enum Kind {
         case master
         case guess

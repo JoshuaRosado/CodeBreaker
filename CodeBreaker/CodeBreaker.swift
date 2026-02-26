@@ -16,9 +16,11 @@ struct CodeBreaker {
     let pegChoices: [Peg] = [.red, .green, .blue, .yellow]
     
     mutating func changeGuessPeg(at index: Int){
-        let existingPeg = guess.pegs[index]
+        let existingPeg = guess.pegs[index] // current peg index
+        // if current peg equals first index
         if let indexOfExistingPegInPegChoices = pegChoices.firstIndex(
             of: existingPeg) {
+            // add one index to go to the next color in the array
             let newPeg = pegChoices[(indexOfExistingPegInPegChoices + 1) % pegChoices.count]
                 guess.pegs[index] = newPeg
         } else {
